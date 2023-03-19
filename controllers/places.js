@@ -34,4 +34,4 @@ router.get('/', (req,res) => {
 //404 PAGE
 //GET-*
 
-module.exprt = router
+module.exports = router
