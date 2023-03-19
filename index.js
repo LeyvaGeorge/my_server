@@ -7,12 +7,14 @@ server.engine('jsx',require('express-react-views').createEngine())
 
 server.use('/places', require('./controllers/places'))
 
+//sends to home
 server.get('/', (req,res) => {
     res.render('home')
 })
 
+//sends to 404 page
 server.get('*', (req,res) => {
-    res.status(404).send('<h1>404 Page</h1>')
+    res.render('error404')
 })
 
 server.listen(process.env.PORT,function () {
