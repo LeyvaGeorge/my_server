@@ -1,5 +1,11 @@
 h1 {
-    text-align: center;
-    color: green;
-  }
-  
+  text-align: center;
+  color: cornflowerblue;
+}
+p {
+  text-align: center;
+}  
+button {
+  background-color: blue;
+  color: white;
+}

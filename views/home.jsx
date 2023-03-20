@@ -7,8 +7,14 @@ function home () {
       <Def>
           <main>
               <h1>HOME</h1>
+              <div>
+                <img src="https://place-puppy.com/300x300" alt="Puppy" />
+                <div>
+                  <p>This a place holder for reference</p>
+                </div>
+              </div>
               <a href="/places">
-                <button className="btn-primary">Places Page</button>
+                <button className="btn-primary">Places</button>
               </a>
           </main>
       </Def>
