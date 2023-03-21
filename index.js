@@ -1,16 +1,20 @@
 //Modules and Globals
 require('dotenv').config()
+
 const express = require('express')
 const server = express()
+
+//Depend
 const methodOverride = require('method-override')
 
 //Express Setting (MIDDLEWARE)
+server.use(methodOverride('_method'))
 server.use(express.static('public'))
 server.use(express.urlencoded({ extended:true}))
 server.set('views',__dirname + '/views')
 server.set('view engine','jsx')
 server.engine('jsx',require('express-react-views').createEngine())
-server.use(methodOverride('_method'))
+
 
 //sends to home
 server.get('/', (req,res) => {
