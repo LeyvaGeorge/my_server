@@ -3,19 +3,21 @@ require('dotenv').config()
 const express = require('express')
 const server = express()
 
-//Express Setting
+//Express Setting (MIDDLEWARE)
+server.use(express.static('public'))
+server.use(express.urlencoded({ extended:true}))
 server.set('views',__dirname + '/views')
 server.set('view engine','jsx')
 server.engine('jsx',require('express-react-views').createEngine())
-server.use(express.static('public'))
-
-//=====  Controllers & Routes  =====
-server.use('/places', require('./controllers/places'))
 
 //sends to home
 server.get('/', (req,res) => {
     res.render('home')
 })
+
+//=====  Controllers & Routes  =====
+const placesController = require('./controllers/places')
+server.use('/places', placesController)
 
 //sends to 404 page
 server.get('*', (req,res) => {

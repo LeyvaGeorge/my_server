@@ -23,7 +23,10 @@ router.get('/', (req,res) => {
 
 //CREATE
 //POST-/PLACES
-
+router.post('/',(req,res) => {
+  console.log(req.body)
+  res.send('POST /places/')
+})
 //FORM PAGE
 //GET-/PLACES/NEW
 router.get('/new', (req,res) => {
