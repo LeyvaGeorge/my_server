@@ -8,13 +8,6 @@ function home () {
           <main>
               <h1>HOME</h1>
 
-              <a href="/places/new">
-                <button className='btn-primary'>New</button>
-              </a>
-              <a href="/places">
-                <button className="btn-primary">Places</button>
-              </a>
-              
               <div>
                 <img src="https://place-puppy.com/300x300" alt="Puppy" />
                 <div>

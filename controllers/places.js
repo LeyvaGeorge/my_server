@@ -10,7 +10,7 @@ router.get('/', (req,res) => {
 //GET-/PLACES
 
 //CREATE
-//POST-/PLACES
+
 router.post('/',(req,res) => {
   
   if (!req.body.pic) {
@@ -29,12 +29,25 @@ router.post('/',(req,res) => {
 })
 
 //FORM PAGE
-//GET-/PLACES/NEW
 router.get('/new', (req,res) => {
   res.render('places/new')
 })
+
 //PARTICULAR PLACE 
-//GET-/PLACES/:ID
+router.get('/:id', (req, res) => {
+  let id = Number(req.params.id)
+  if (isNaN(id)) {
+    res.render('error404')
+  }
+  else if (!places[id]) {
+    res.render('error404')
+  }
+  else {
+    res.render('places/show', { place: places[id], id })
+  }
+})
+
+
 
 //UPDATE PARTICULAR PLACE
 //PUT-/PLACES/:ID
@@ -43,7 +56,19 @@ router.get('/new', (req,res) => {
 //GET-/PLACES/:ID/EDIT
 
 //DELETE PLACE
-//DELETE-/PLACES/:ID
+router.delete('/:id', (req, res) => {
+  let id = Number(req.params.id)
+  if (isNaN(id)) {
+    res.render('error404')
+  }
+  else if (!places[id]) {
+    res.render('error404')
+  }
+  else {
+    places.splice(id,1)
+    res.redirect('/places')
+  }
+})
 
 //CREATE A (RANT COMMENT) ABOUT A PARTICULAR PLACE
 //POST-/PLACES/:ID/RANT
