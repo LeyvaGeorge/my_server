@@ -1,20 +1,8 @@
 const router = require('express').Router()
+const places = require('../models/dogs.js')
+
 //HOME PAGE
 router.get('/', (req,res) => {
-    let places = [{
-        name: 'Coco',
-        city: 'Seattle',
-        state: 'WA',
-        breed: 'Poodle',
-        pic: '/images/Poodle.jpg'
-      }, {
-        name: 'Gizmo',
-        city: 'Phoenix',
-        state: 'AZ',
-        breed: 'Shih Tzu',
-        pic: '/images/shih tzu.jpeg'
-      }]
-      
     res.render('places/index',{places})
 })
 
@@ -24,9 +12,22 @@ router.get('/', (req,res) => {
 //CREATE
 //POST-/PLACES
 router.post('/',(req,res) => {
-  console.log(req.body)
-  res.send('POST /places/')
+  
+  if (!req.body.pic) {
+    //Default image if on is not provided
+    req.body.pic = 'https://place-puppy.com/400x400'
+  }
+  if (!req.body.city) {
+    req.body.city = 'Anytown'
+  }
+
+  if (!req.body.state) {
+    req.body.state = 'USA'
+  }
+  places.push(req.body)
+  res.redirect('/places')
 })
+
 //FORM PAGE
 //GET-/PLACES/NEW
 router.get('/new', (req,res) => {
