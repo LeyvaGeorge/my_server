@@ -1,5 +1,7 @@
 # my_server
 
+Changed cusinze to breed
+
 my Server is an app where users can stores.
 
 Method|Path|Purpose
