@@ -1,6 +1,6 @@
-//places.js
-
 const mongoose = require('mongoose')
+
+
 const placeSchema = new mongoose.Schema({
     name: {type: String, required: true},
     pic: {type: String, default: 'https://place-puppy.com/300x300'},

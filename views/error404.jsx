@@ -10,6 +10,7 @@ function error404 () {
               <div>
                 <img src="/images/404.jpg" alt="404 code" />
               </div>
+              <h3>This doesn't exist</h3>
           </main>
       </Def>
     )
