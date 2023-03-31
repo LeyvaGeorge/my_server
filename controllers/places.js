@@ -98,7 +98,7 @@ router.put('/:id', (req, res) => {
 
 //HOME PAGE / PLACE INDEX
 router.get('/', (req,res) => {
-    db.Place.find()
+    db.place_schema.find()
     .then((places) => {
       res.render('places/index', {places})
     })
