@@ -41,22 +41,22 @@ router.post('/:id/comment', (req, res) => {
   req.body.rant = req.body.rant === "on"
   console.log(req.body)
 
-  db.Place.findById(req.params.id)
-    .then(place => {
-        db.Comment.create(req.body)
-        .then(comment => {
+  db.place_schema.findById(req.params.id)
+    .then((place) => {
+        db.comment_schema.create(req.body)
+        .then((comment) => {
             place.comments.push(comment.id)
             place.save()
               .then(() => {
                 res.redirect(`/places/${req.params.id}`)
               })
         })
-        .catch(err => {
+        .catch((err) => {
             console.log(err)
             res.render('error404')
         })
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err)
       res.render('error404')
     })
@@ -64,26 +64,25 @@ router.post('/:id/comment', (req, res) => {
 
 //PARTICULAR PLACE 
 router.get('/:id', (req, res) => {
-  db.Place.findById(req.params.id)
-  .populate('comments')
-  .then(place => {
-    console.log(place.comments)
-    res.render('places/show', {place})
-  })
-  .catch(err => {
-    console.log('err',err)
-    res.render('error404')
-  })
+  db.place_schema.findById(req.params.id)
+    .populate('comments')
+    .then(place => {
+      res.render('places/show', {place})
+    })
+    .catch(err => {
+      console.log(err)
+      res.render('error404')
+    })
 })
 
 //DELETE PLACE
 router.delete('/:id', (req, res) => {
   db.place_schema.findByIdAndDelete(String(req.params.id))
-      .then(() => { res.redirect('/places') })
-      .catch((err) => {
-          console.log(err)
-          res.render('error404')
-      })
+    .then(() => { res.redirect('/places') })
+    .catch((err) => {
+      console.log(err)
+      res.render('error404')
+    })
 })
 
 //UPDATE PARTICULAR PLACE
@@ -102,7 +101,7 @@ router.get('/', (req,res) => {
     .then((places) => {
       res.render('places/index', {places})
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err)
       res.render('error404')
     })
@@ -110,24 +109,19 @@ router.get('/', (req,res) => {
 
 //CREATE
 router.post('/',(req,res) => {
-  db.Place.create(req.body)
-  .then(() => {
-    res.redirect('/places')
-  })
-  .catch(err => {
-    if (err && err.name == 'ValidationError') {
+  db.place_schema.create(req.body)
+  .then(() => {res.redirect('/places') })
+  .catch((err) => {
+    if (err.name == 'ValidationError') {
       let message = 'Validation Error: '
       for (var field in err.errors) {
         message += `${field} was ${err.errors[field].value}.`
         message += `${err.errors[field].message}`
       }
       console.log('Validation error message', message)
-      
       res.render('places/new', {message})
     }
-    else {
-      res.render('error404')
-    }
+    res.render('error404')
   })
 })
 

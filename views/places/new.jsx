@@ -12,10 +12,12 @@ function new_form (data) {
     }
     return (
         <Def>
-            <h1>New Pup</h1>
+            <h1>Add a New Place</h1>
+            {message}
+            <br/>
             <form  action = "/places" method = "POST">
                 <div className='form-group'>
-                    <label htmlFor="name">Pup's Name</label>
+                    <label htmlFor="name">Name</label>
                     {message}
                     <input className='form-control' type="text" id="name" name="name" required/>
                 </div>
@@ -31,7 +33,7 @@ function new_form (data) {
                 </div>
 
                 <div className = 'form-group'>
-                    <label htmlFor="breed">Breed</label>
+                    <label htmlFor="breed">Cuisines</label>
                     <input className='form-control' type="text" id="breed" name="breed" required/>
                 </div>
 
